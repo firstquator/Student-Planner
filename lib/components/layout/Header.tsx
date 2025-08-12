@@ -26,7 +26,7 @@ export default function Header() {
           </nav>
           
           <div className="flex items-center space-x-4">
-            <Button variant="outline" size="sm">
+            <Button variant="secondary" size="sm">
               로그인
             </Button>
             <Button size="sm">

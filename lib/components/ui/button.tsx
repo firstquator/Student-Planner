@@ -4,40 +4,52 @@ import { cn } from '@/lib/utils/cn'
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
-  size?: 'default' | 'sm' | 'lg' | 'icon'
+  variant?: 'primary' | 'secondary' | 'ghost' | 'icon'
+  size?: 'sm' | 'md' | 'lg'
+  loading?: boolean
   asChild?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'default', size = 'default', asChild = false, ...props }, ref) => {
+  ({ className, variant = 'primary', size = 'md', loading = false, asChild = false, disabled, children, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button'
+    
+    const baseClasses = "inline-flex items-center justify-center font-semibold transition-all duration-150 ease-in-out cursor-pointer disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#FF385C] focus:ring-offset-2"
+    
+    const variantClasses = {
+      primary: "bg-[#FF385C] text-white border-none hover:bg-[#E31C5F] hover:scale-[1.02] active:bg-[#C13515] disabled:bg-[#EBEBEB] disabled:text-[#C1C1C1]",
+      secondary: "bg-white text-[#222222] border border-[#222222] hover:bg-[#F7F7F7] hover:border-black active:bg-[#EBEBEB] disabled:bg-[#EBEBEB] disabled:text-[#C1C1C1] disabled:border-[#C1C1C1]",
+      ghost: "bg-transparent text-[#222222] border-none hover:bg-[#F7F7F7] active:bg-[#EBEBEB] disabled:bg-transparent disabled:text-[#C1C1C1]",
+      icon: "bg-transparent text-[#717171] border-none rounded-full hover:bg-[#F7F7F7] hover:text-[#222222] p-2 disabled:text-[#C1C1C1]"
+    }
+    
+    const sizeClasses = {
+      sm: variant === 'icon' ? 'w-8 h-8' : 'px-4 py-2 text-sm rounded-md',
+      md: variant === 'icon' ? 'w-10 h-10' : 'px-6 py-[14px] text-base rounded-lg',
+      lg: variant === 'icon' ? 'w-12 h-12' : 'px-8 py-4 text-lg rounded-lg'
+    }
+    
     return (
       <Comp
+        ref={ref}
         className={cn(
-          // 기본 스타일
-          'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
-          // 변형별 스타일
-          {
-            'bg-blue-600 text-white hover:bg-blue-700': variant === 'default',
-            'bg-red-600 text-white hover:bg-red-700': variant === 'destructive',
-            'border border-gray-300 bg-white text-gray-900 hover:bg-gray-50': variant === 'outline',
-            'bg-gray-100 text-gray-900 hover:bg-gray-200': variant === 'secondary',
-            'hover:bg-gray-100 text-gray-900': variant === 'ghost',
-            'text-blue-600 underline-offset-4 hover:underline': variant === 'link',
-          },
-          // 크기별 스타일
-          {
-            'h-10 px-4 py-2': size === 'default',
-            'h-9 rounded-md px-3': size === 'sm',
-            'h-11 rounded-md px-8': size === 'lg',
-            'h-10 w-10': size === 'icon',
-          },
+          baseClasses,
+          variantClasses[variant],
+          sizeClasses[size],
           className
         )}
-        ref={ref}
+        disabled={disabled || loading}
         {...props}
-      />
+      >
+        {loading ? (
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+            {children}
+          </div>
+        ) : (
+          children
+        )}
+      </Comp>
     )
   }
 )

@@ -52,16 +52,16 @@ export default function DashboardPage() {
         <div className="bg-white p-6 rounded-lg border shadow-sm">
           <h2 className="text-xl font-semibold mb-4">빠른 작업</h2>
           <div className="space-y-3">
-            <Button className="w-full justify-start" variant="outline">
+            <Button className="w-full justify-start" variant="secondary">
               📝 새 과제 추가
             </Button>
-            <Button className="w-full justify-start" variant="outline">
+            <Button className="w-full justify-start" variant="secondary">
               📅 일정 등록
             </Button>
-            <Button className="w-full justify-start" variant="outline">
+            <Button className="w-full justify-start" variant="secondary">
               🎯 목표 설정
             </Button>
-            <Button className="w-full justify-start" variant="outline">
+            <Button className="w-full justify-start" variant="secondary">
               📊 성과 분석
             </Button>
           </div>

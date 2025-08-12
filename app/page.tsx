@@ -17,7 +17,7 @@ export default function HomePage() {
           <Button size="lg" asChild>
             <Link href="/dashboard">지금 시작하기</Link>
           </Button>
-          <Button variant="outline" size="lg" asChild>
+          <Button variant="secondary" size="lg" asChild>
             <Link href="/about">더 알아보기</Link>
           </Button>
         </div>
@@ -97,6 +97,15 @@ export default function HomePage() {
           <Link href="/signup">무료로 시작하기</Link>
         </Button>
       </section>
+
+      {/* 컴포넌트 페이지로 이동하는 버튼 */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <Button variant="primary" size="md" className="shadow-lg" asChild>
+          <Link href="/components">
+            🎨 컴포넌트 데모
+          </Link>
+        </Button>
+      </div>
     </div>
   )
 }
