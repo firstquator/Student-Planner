@@ -5,7 +5,9 @@
       "Bash(npm install:*)",
       "Bash(npm run dev:*)",
       "Bash(git add:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(mkdir:*)",
+      "Bash(del \"C:\\Projects\\Student-Planner\\docs\\Tasks\\Todos\\project-todo.md\")"
     ]
   },
   "enableAllProjectMcpServers": true,
